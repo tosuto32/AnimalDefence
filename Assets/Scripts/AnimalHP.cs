@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class AnimalHP : MonoBehaviour
 {
-    public float curHp;
-    float maxHp;
+    float curHp;
+    public float maxHp;
     public float HP
     {
         get { return curHp; }
@@ -14,6 +14,7 @@ public class AnimalHP : MonoBehaviour
         {
             curHp = Mathf.Max(0, value);
             //sliderHp.value = curHp;
+            print("hit      " + HP );
         }
     }
 

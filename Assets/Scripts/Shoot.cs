@@ -4,17 +4,27 @@ using UnityEngine;
 
 public class Shoot : MonoBehaviour
 {
-    GameObject bulletFactory;
+    public GameObject bulletFactory;
+    float curTime;
+    public float createTime = 3;
 
     // Start is called before the first frame update
     void Start()
     {
-        print("Shoot");
+        curTime = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        curTime += Time.deltaTime;
+        if (curTime > createTime)
+        {
+            GameObject bullet = Instantiate(bulletFactory);
+            bullet.transform.position = Camera.main.transform.position;
+            bullet.transform.forward = Camera.main.transform.forward;
+
+            curTime = 0;
+        }
     }
 }
