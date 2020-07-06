@@ -6,7 +6,7 @@ public class Shoot : MonoBehaviour
 {
     public GameObject bulletFactory;
     float curTime;
-    public float createTime = 3;
+    public float createTime = 0.3f;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +25,8 @@ public class Shoot : MonoBehaviour
             bullet.transform.forward = Camera.main.transform.forward;
 
             curTime = 0;
+
+            Destroy(bullet, 3);
         }
     }
 }

@@ -15,12 +15,15 @@ public class ShootNet : MonoBehaviour
 
     // c의 위치를 원위치값
     Vector3 cOrigin;
+    // 그물 발사 시작위치는 카메라로부터 살짝 이동한지점
+    Vector3 CamerP;
 
-
+    // 그물 조준범위 표시를 위해 조준점 랜더러 온오프
+    public MeshRenderer targetRenderer;
 
     // 그물공장
     public GameObject netFactory;
-    
+
     public RectTransform knob;
 
     public Vector3 knobOrigin;
@@ -30,6 +33,7 @@ public class ShootNet : MonoBehaviour
     public float kAdjustDistance = 0.002f;
 
     bool isDrag;
+
 
     public Transform a;
     public Transform b;
@@ -50,13 +54,12 @@ public class ShootNet : MonoBehaviour
         lr.startWidth = 0.5f;
         lr.endWidth = 0.2f;
         routeNet = new Vector3[maxCount];
+        targetRenderer.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-
-
         // 마우스 버튼을 누르면 그 위치를 기억하고
         if (Input.GetMouseButtonDown(0))
         {
@@ -64,6 +67,7 @@ public class ShootNet : MonoBehaviour
             knob.position = Input.mousePosition;
             isDrag = true;
             lr.enabled = true;
+            targetRenderer.enabled = true;
         }
         // 마우스 버튼을 때면 누른 위치에서 땐 위치까지 거리를 측정하고
         else if (Input.GetMouseButtonUp(0))
@@ -75,14 +79,15 @@ public class ShootNet : MonoBehaviour
             lr.enabled = false;
             knob.position = knobOrigin;
             c.position = cOrigin;
+            targetRenderer.enabled = false;
 
-            // 여기서 포문돌려서 그물을 이동시키자.
-            for(int i = 0; i < maxCount; i++)
-            {
+            // 여기서 그물을 생성하고 그 그물의 shoot함수를 이용해서 이동시키자.
+            GameObject net = Instantiate(netFactory);
+            net.transform.position = CamerP;
+            net.GetComponent<Net>().SetRoute(routeNet);
 
-            }
         }
-        
+
         else if (Input.GetMouseButton(0))
         {
             knob.position = Input.mousePosition;
@@ -96,7 +101,7 @@ public class ShootNet : MonoBehaviour
 
             // 카메라의 위치에서 카메라가 보는 전방으로 레이를 쏜다.
 
-            Vector3 CamerP =Camera.main.transform.position;
+            CamerP = Camera.main.transform.position;
             // 카메라에서 선이 보이도록 위치를 수정
             CamerP.z += 1;
             CamerP.y -= 2;
@@ -124,19 +129,18 @@ public class ShootNet : MonoBehaviour
 
 
                 // Slerp로 곡선그리기
-                Vector3 center = (CamerP + c.position)*0.5f;
+                Vector3 center = (CamerP + c.position) * 0.5f;
                 center.y -= 70.0f;
-                
+
                 b.position = center;
                 Vector3 cameraCenter = CamerP - center;
                 Vector3 cCenter = c.position - center;
                 lr.positionCount = maxCount;
-                for (int i = 0; i<maxCount; i++)
+                for (int i = 0; i < maxCount; i++)
                 {
-                    lr.positionCount = i + 1;
                     float t = (float)i / maxCount;
                     Vector3 subCurve = Vector3.Slerp(cameraCenter, cCenter, t);
-                    lr.SetPosition(i, subCurve+center);
+                    lr.SetPosition(i, subCurve + center);
                     // 그물에서 특정지점으로 이동하는 함수를 만들고 routeNet의 값을 포문돌려서 이동시키자.
                     routeNet[i] = lr.GetPosition(i);
                 }
@@ -144,5 +148,7 @@ public class ShootNet : MonoBehaviour
             }
         }
     }
+
+
 }
 

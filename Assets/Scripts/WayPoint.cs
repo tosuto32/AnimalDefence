@@ -6,15 +6,29 @@ using UnityEngine;
 public class WayPoint : MonoBehaviour
 {
     public Transform[] wp;
+
+    // 싱글턴으로 위치값을 가져올수있게 만든다.
+    public static WayPoint instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public Transform[] GetWayPoint()
+    {
+        return wp;
     }
 }

@@ -7,6 +7,8 @@ public class AnimalHP : MonoBehaviour
 {
     float curHp;
     public float maxHp;
+    float rabbitScore;
+    float dogScore;
     public float HP
     {
         get { return curHp; }
@@ -14,6 +16,18 @@ public class AnimalHP : MonoBehaviour
         {
             curHp = Mathf.Max(0, value);
             //sliderHp.value = curHp;
+
+            if (HP == 0)
+            {
+                if (transform.gameObject.name.Contains("Rabbit"))
+                {
+                    ScoreManager.instance.SetScore(1);
+                }else if (transform.gameObject.name.Contains("Dog"))
+                {
+                    ScoreManager.instance.SetScore(10);
+                }
+                print("채력이 0 죽음");
+            }
             print("hit      " + HP );
         }
     }
@@ -30,4 +44,6 @@ public class AnimalHP : MonoBehaviour
     {
 
     }
+
+    
 }

@@ -12,11 +12,13 @@ public class Bullet : MonoBehaviour
 
     Collider col;
     bool crash;
+
+    public GameObject bulletEffectFactory;
     // Start is called before the first frame update
     void Start()
     {
         dir = Camera.main.transform.forward;
-        crash = false;
+        crash = false; // 최근에 충돌한적이 있는지 채크
     }
 
     // Update is called once per frame
@@ -30,6 +32,7 @@ public class Bullet : MonoBehaviour
         // 총알에 맞은것이 동물이면 채력을 1깍고 채력이 0이라면 파괴한다.
         if (other.gameObject.tag.Contains("Animal"))
         {
+            // 다른거와 충돌한적이 없다면
             if (crash == false)
             {
                 GameObject animal = other.gameObject;                       // animal을 채력을 깍고 속도를 0으로 바꾼다.
@@ -39,6 +42,9 @@ public class Bullet : MonoBehaviour
 
                 crash = true;
 
+                GameObject bulletEffect = Instantiate(bulletEffectFactory);
+                bulletEffect.transform.position = transform.position;
+
                 col = transform.GetComponent<Collider>();
                 col.enabled = false;
                 animalHP.HP--;
@@ -46,8 +52,9 @@ public class Bullet : MonoBehaviour
 
                 if (animalHP.HP == 0)                                       // 채력이 0이 되면 죽는다.
                 {
-                    animalCol.enabled = enabled;
-                    Destroy(animal, 1);
+                    animalMove.SetState("die");
+                    animalCol.enabled = false;                              // 죽기전에 다른물체와의 충돌을 방지하기위해 콜라이더를 끈다.
+                    Destroy(animal, 1.5f);
                 }
 
             }
