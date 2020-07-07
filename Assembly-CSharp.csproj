@@ -73,6 +73,9 @@
     <Compile Include="Assets\JMO Assets\Cartoon FX\Scripts\CFX_AutoRotate.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX\Scripts\CFX_LightFlicker.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX\Scripts\CFX_LightIntensityFade.cs" />
+    <Compile Include="Assets\Malbers Animations\Common\Scripts\Events\UnityEventRaiser.cs" />
+    <Compile Include="Assets\Malbers Animations\Common\Scripts\Readme\Readme.cs" />
+    <Compile Include="Assets\Malbers Animations\Common\Scripts\Utilities\UseTransform.cs" />
     <Compile Include="Assets\Rabbits\Demo\Scripts\AnimatorParamatersChange.cs" />
     <Compile Include="Assets\Scripts\ARCameraSim.cs" />
     <Compile Include="Assets\Scripts\AnimalHP.cs" />
@@ -82,6 +85,7 @@
     <Compile Include="Assets\Scripts\LineRenderer_Test.cs" />
     <Compile Include="Assets\Scripts\MainScene.cs" />
     <Compile Include="Assets\Scripts\Net.cs" />
+    <Compile Include="Assets\Scripts\NetEffect.cs" />
     <Compile Include="Assets\Scripts\ScoreManager.cs" />
     <Compile Include="Assets\Scripts\Shoot.cs" />
     <Compile Include="Assets\Scripts\ShootNet.cs" />
@@ -89,10 +93,22 @@
     <Compile Include="Assets\Scripts\ShootNet_v3.cs" />
     <Compile Include="Assets\Scripts\SpawnManager.cs" />
     <Compile Include="Assets\Scripts\WayPoint.cs" />
+    <None Include="Assets\Malbers Animations\Common\Shaders\Mask8Toon.shader" />
+    <None Include="Assets\Malbers Animations\Common\Shaders\Color4x2S.shader" />
     <None Include="Assets\JMO Assets\Cartoon FX\Shaders\CFX3 Multiply Color.shader" />
+    <None Include="Assets\Malbers Animations\Common\Shaders\Color4x2.shader" />
+    <None Include="Assets\Malbers Animations\Common\Shaders\Color4x3S.shader" />
     <None Include="Assets\JMO Assets\Cartoon FX\CartoonFX Free.txt" />
+    <None Include="Assets\Malbers Animations\Common\Shaders\Color4x4.shader" />
+    <None Include="Assets\Malbers Animations\Common\Shaders\Mask4Toon.shader" />
+    <None Include="Assets\Malbers Animations\Common\Shaders\Mask4Realistic.shader" />
     <None Include="Assets\JMO Assets\Cartoon FX Easy Editor\CartoonFX Easy Editor Readme.txt" />
+    <None Include="Assets\Malbers Animations\Common\Shaders\Color4x3.shader" />
+    <None Include="Assets\Malbers Animations\Common\Shaders\Color4x4S.shader" />
+    <None Include="Assets\Malbers Animations\Common\Shaders\AnisotropicCircular.shader" />
+    <None Include="Assets\Malbers Animations\Common\Shaders\AnisotropicWard.shader" />
     <None Include="Assets\JMO Assets\Cartoon FX\Shaders\CFXM_MobileParticleAdd_Alpha8.shader" />
+    <None Include="Assets\Malbers Animations\Common\Shaders\Mask8Realistic.shader" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.14f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

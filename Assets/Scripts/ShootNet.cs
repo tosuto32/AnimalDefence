@@ -111,7 +111,7 @@ public class ShootNet : MonoBehaviour
             int layer = 1 << LayerMask.NameToLayer("Floor");
             if (Physics.Raycast(ray, out hitInfo, 10000, layer))
             {
-                print(hitInfo.transform.name);
+                //print(hitInfo.transform.name);
                 // 와이축의 이동을 제한한다.
                 Vector3 camForward = Camera.main.transform.forward;
                 camForward.y = 0;
@@ -144,7 +144,7 @@ public class ShootNet : MonoBehaviour
                     // 그물에서 특정지점으로 이동하는 함수를 만들고 routeNet의 값을 포문돌려서 이동시키자.
                     routeNet[i] = lr.GetPosition(i);
                 }
-                print(hitInfo.point);
+                //print(hitInfo.point);
             }
         }
     }

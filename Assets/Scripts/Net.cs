@@ -14,11 +14,13 @@ public class Net : MonoBehaviour
 
     public GameObject netEffectFactory;
 
+    //MeshRenderer mr;
+
 
     // Start is called before the first frame update
     void Start()
     {
-
+        //mr = GetComponent<MeshRenderer>();
     }
 
     // Update is called once per frame
@@ -72,25 +74,27 @@ public class Net : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        print(other.gameObject.name+"            넷이 충돌한 물체");
+        //print(other.gameObject.name+"            넷이 충돌한 물체");
         // 바닥에 닿으면 그곳으로부터 일정범위(Sphere)를 생성한다.
         // 그 범위안에 동물이 있으면 동물의 채력을 3깍는다.
         if (other.gameObject.layer == LayerMask.NameToLayer("Floor"))
         {
             Destroy(gameObject);
+            //mr.enabled = false;
             GameObject netEffect = Instantiate(netEffectFactory);
             netEffect.transform.position = transform.position;
             // 이펙트는 3초후에 삭제
             Destroy(netEffect, 3);
+            //Destroy(gameObject, 3.1f);
             // 충돌한 범위 생성
             Collider[] cols = Physics.OverlapSphere(netEffect.transform.position, netEffect.transform.localScale.z / 2);
             for (int i = 0; i < cols.Length; i++)
             {
-                print(cols[i].gameObject.name+"     이펙트에 충돌한것들");
+                //print(cols[i].gameObject.name+"     이펙트에 충돌한것들");
                 // 중돌한게 동물tag이면
                 if (cols[i].gameObject.tag.Contains("Animal"))
                 {
- 
+
                     // 동물의 값을 변경할 변수 가져오고
                     GameObject animal = cols[i].gameObject;
                     AnimalHP animalHP = animal.GetComponent<AnimalHP>();

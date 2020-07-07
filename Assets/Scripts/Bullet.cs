@@ -9,9 +9,10 @@ public class Bullet : MonoBehaviour
 {
     public float speed;
     Vector3 dir;
-
+    public int attackPower;
     Collider col;
     bool crash;
+
 
     public GameObject bulletEffectFactory;
     // Start is called before the first frame update
@@ -19,6 +20,15 @@ public class Bullet : MonoBehaviour
     {
         dir = Camera.main.transform.forward;
         crash = false; // 최근에 충돌한적이 있는지 채크
+        if (GameManager.instance.powerUPState)
+        {
+            attackPower = 3;
+        }
+        else
+        {
+            attackPower = 1;
+        }
+
     }
 
     // Update is called once per frame
@@ -47,7 +57,7 @@ public class Bullet : MonoBehaviour
 
                 col = transform.GetComponent<Collider>();
                 col.enabled = false;
-                animalHP.HP--;
+                animalHP.HP = attackPower;
                 animalMove.SetState("stop");
 
                 if (animalHP.HP == 0)                                       // 채력이 0이 되면 죽는다.

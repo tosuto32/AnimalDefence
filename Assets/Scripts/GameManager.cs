@@ -10,24 +10,44 @@ public class GameManager : MonoBehaviour
     // 필살기 버튼은 30초의 쿨타임을 가지며 활성화될때만 눌리도록 처리
     // 플레이어의 채력이 1감소하면 UI의 표시를 변경
     // 게임오버가 되면 게임오버 UI를 보여줌
-    int curHP;
-    public int HP
+    int curHP;                      // 현재 채력
+    int hpIndex;                    // 채력 UI배열 인덱스
+    public int playerMaxHP;         // 플레이어의 최대채력
+    public int HP                   // 플레이어 채력 프로퍼티
     {
         get { return curHP; }
         set
         {
-            curHP -= value;
-            // 채력깍일때마다 UI지우기 구현해야함
+            if (hpIndex < playerMaxHP)
+            {
+                lifeUI[hpIndex].enabled = false;
+                hpIndex++;
+                curHP -= value;
+            }
+
             if (curHP == 0)
             {
                 // 게임오버 UI보여주기
             }
         }
     }
-    public RawImage[] lifeUI;
-    public Button PowerUpButton;
+    public RawImage[] lifeUI;           // 채력 UI이미지
+    public Button powerUpButton;        // 파워업 버튼
 
-    public static GameManager instance;
+    public static GameManager instance; // 싱글턴 객체
+
+    public bool powerUPState;           // 파워업 상태
+
+    float curPowerUpTime;               // 파워업 지속시간 체크
+    public float powerUpLimitTime = 5;
+
+    public bool coolTimeButtonLock;  // 버튼이 눌렸을때 체크, 눌리면 쿨타임 시작
+    float coolTimeButtonLockTime;   // 쿨타임 체크
+    public float coolTimeButtonLockLimitTime = 10;
+
+
+
+
     private void Awake()
     {
         instance = this;
@@ -36,12 +56,48 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        HP = 3;
+        playerMaxHP = 3;
+        curHP = playerMaxHP;
+        hpIndex = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (coolTimeButtonLock)
+        {
+            coolTimeButtonLockTime += Time.deltaTime;
+            if (coolTimeButtonLockTime > coolTimeButtonLockLimitTime)
+            {
+                // 버튼 다시활성화 하고 버튼눌림상태를 비활성화
+                coolTimeButtonLock = false;
+                powerUpButton.interactable = true;
+            }
+        }
 
+        if (powerUPState)
+        {
+            curPowerUpTime += Time.deltaTime;
+            if (curPowerUpTime > powerUpLimitTime)
+            {
+                // 버튼 다시활성화 하고 버튼눌림상태를 비활성화
+                powerUPState = false;
+                // 
+            }
+        }
+
+    }
+
+
+    // 일정 시간동안 파워업해서 총알에 이펙트를 추가한다.
+    public void OnClickPowerUP()
+    {
+        coolTimeButtonLock = true;
+        //// 버튼 비활성화
+        powerUpButton.interactable = false;
+        powerUPState = true;
+        curPowerUpTime = 0;
+        coolTimeButtonLockTime = 0;
+        // UI를 불타오르게 하는 이펙트 처리... 
     }
 }
