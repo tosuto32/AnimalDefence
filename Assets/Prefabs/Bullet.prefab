@@ -109,6 +109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 50
+  attackPower: 0
   bulletEffectFactory: {fileID: 1313454009700770058, guid: 0ec936fe8e381fe4f82748f7ef71a152,
     type: 3}
 --- !u!54 &8107005861245792610

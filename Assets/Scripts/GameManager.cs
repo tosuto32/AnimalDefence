@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -24,10 +25,11 @@ public class GameManager : MonoBehaviour
                 hpIndex++;
                 curHP -= value;
             }
-
             if (curHP == 0)
             {
-                // 게임오버 UI보여주기
+                print("게임오버됨");
+                //게임오버시할것
+                GoMainScene();
             }
         }
     }
@@ -45,6 +47,9 @@ public class GameManager : MonoBehaviour
     float coolTimeButtonLockTime;   // 쿨타임 체크
     public float coolTimeButtonLockLimitTime = 10;
 
+    public Slider powerUPTimeSlider;
+    public Image powerUPSliderFillImage;
+
 
 
 
@@ -59,6 +64,9 @@ public class GameManager : MonoBehaviour
         playerMaxHP = 3;
         curHP = playerMaxHP;
         hpIndex = 0;
+        powerUPTimeSlider.maxValue = powerUpLimitTime;  // 파워업 시간을 설정하고 시작시 비활성화하고
+        powerUPTimeSlider.value = powerUpLimitTime;     // 파워업이 활성화 되면 다시 보여지게 한다.
+        powerUPSliderFillImage.enabled = false;
     }
 
     // Update is called once per frame
@@ -77,12 +85,22 @@ public class GameManager : MonoBehaviour
 
         if (powerUPState)
         {
+            powerUPSliderFillImage.enabled = true;
             curPowerUpTime += Time.deltaTime;
+            float temp = powerUPTimeSlider.value;
+            temp -= Time.deltaTime;
+            if (temp < 0)
+            {
+                temp = 0;
+            }
+            powerUPTimeSlider.value = temp;
             if (curPowerUpTime > powerUpLimitTime)
             {
                 // 버튼 다시활성화 하고 버튼눌림상태를 비활성화
                 powerUPState = false;
-                // 
+
+                powerUPTimeSlider.value = powerUPTimeSlider.maxValue;
+                powerUPSliderFillImage.enabled = false;
             }
         }
 
@@ -99,5 +117,10 @@ public class GameManager : MonoBehaviour
         curPowerUpTime = 0;
         coolTimeButtonLockTime = 0;
         // UI를 불타오르게 하는 이펙트 처리... 
+    }
+    
+    public void GoMainScene()
+    {
+        SceneManager.LoadScene("MainScene");
     }
 }

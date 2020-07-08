@@ -20,6 +20,7 @@ public class MainScene : MonoBehaviour
 
     public void OnStartClick()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("GameScene");
     }
+
 }

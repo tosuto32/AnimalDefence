@@ -10,11 +10,14 @@ public class SpawnManager : MonoBehaviour
     float createRabbitTime=2;
     float curDogTime=0;
     float createDogTime = 5;
+    float curTigerTime = 0;
+    float createTigerTime = 20;
 
     public Transform spawnPoint;
 
     public GameObject rabbitFactory;
     public GameObject dogFactory;
+    public GameObject tigerFactory;
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +41,13 @@ public class SpawnManager : MonoBehaviour
             GameObject dog = Instantiate(dogFactory);
             dog.transform.position = spawnPoint.position;
             curDogTime = 0;
+        }
+        curTigerTime += Time.deltaTime;
+        if (curTigerTime > createTigerTime)
+        {
+            GameObject tiger = Instantiate(tigerFactory);
+            tiger.transform.position = spawnPoint.position;
+            curTigerTime = 0;
         }
 
     }

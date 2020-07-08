@@ -109,8 +109,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c73b42f7bb0e8f94990af0ff91ebb7d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
   am: {fileID: 2310933788409908263}
+  buffEfectFactory: {fileID: 100006, guid: 5132c0c143e145f44bb1ac60326dd962, type: 3}
 --- !u!195 &8886073508674666166
 NavMeshAgent:
   m_ObjectHideFlags: 0

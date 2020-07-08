@@ -15,18 +15,36 @@ public class Net : MonoBehaviour
     public GameObject netEffectFactory;
 
     //MeshRenderer mr;
+    public int netDamage = 3;
+    Vector3 originAngle;
+    float rx;
 
+    AudioSource brokenSound;
+    public AudioClip[] brokenSoundSource;
 
+    public Renderer[] thisRenders;
+    Collider thisCol;
     // Start is called before the first frame update
     void Start()
     {
         //mr = GetComponent<MeshRenderer>();
+        originAngle = transform.eulerAngles;
+        brokenSound = GetComponent<AudioSource>();
+        brokenSound.playOnAwake = false;
+        brokenSound.clip = brokenSoundSource[Random.Range(0, 4)];
+
+        thisCol = GetComponent<BoxCollider>();
     }
 
     // Update is called once per frame
     void Update()
     {
         Shoot();
+        rx += 500 * Time.deltaTime;
+
+        transform.eulerAngles = originAngle + new Vector3(rx, 0, 0);
+
+        transform.Rotate(Vector3.down * 10000 * Time.deltaTime);
     }
 
     public void Shoot()
@@ -79,7 +97,14 @@ public class Net : MonoBehaviour
         // 그 범위안에 동물이 있으면 동물의 채력을 3깍는다.
         if (other.gameObject.layer == LayerMask.NameToLayer("Floor"))
         {
-            Destroy(gameObject);
+
+            brokenSound.Play();
+            thisCol.enabled = false;
+            for(int i=0;i< thisRenders.Length; i++)
+            {
+                thisRenders[i].enabled = false;
+            }
+            Destroy(gameObject,2);
             //mr.enabled = false;
             GameObject netEffect = Instantiate(netEffectFactory);
             netEffect.transform.position = transform.position;
@@ -101,9 +126,9 @@ public class Net : MonoBehaviour
                     AnimalMove animalMove = animal.GetComponent<AnimalMove>();
                     BoxCollider animalCol = animal.GetComponent<BoxCollider>();
 
-                    animalHP.HP -= 3;
+                    animalHP.HP = netDamage;
                     animalMove.SetState("stop");
-                    if (animalHP.HP == 0)
+                    if (animalHP.HP <= 0)
                     {
                         animalMove.SetState("die");
                         animalCol.enabled = false;                              // 죽기전에 다른물체와의 충돌을 방지하기위해 콜라이더를 끈다.

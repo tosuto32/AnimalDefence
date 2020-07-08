@@ -13,6 +13,10 @@ public class ScoreManager : MonoBehaviour
 
     public static ScoreManager instance;
 
+    public int rabbitScore = 1;
+    public int dogScore = 10;
+    public int tigerScore = 30;
+
     private void Awake()
     {
         instance = this;
