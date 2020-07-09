@@ -69,6 +69,8 @@ public class AnimalMove : MonoBehaviour
     AudioSource roarSound;
     public AudioClip roarSoundSorce;
 
+    public GameObject wayPoint;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -84,8 +86,9 @@ public class AnimalMove : MonoBehaviour
         curRoarTime = 0;
         //wayPoint = GetComponent<WayPoint>();
         //wayPoint.GetWayPoint();
-
-        targets = WayPoint.instance.GetWayPoint();  // 경유지 좌표 가져오기
+        wayPoint = GameObject.Find("WayPoint");
+        WayPoint wp = wayPoint.GetComponent<WayPoint>();
+        targets = wp.GetWayPoint();  // 경유지 좌표 가져오기
         am.GetComponent<Animator>();
         //animalHP = GetComponent<AnimalHP>();
 

@@ -29,12 +29,17 @@ public class GameManager : MonoBehaviour
             {
                 print("게임오버됨");
                 //게임오버시할것
-                GoMainScene();
+                gameOverUI.SetActive(true);
+                spwanManager.SetActive(false);
+                Camera.main.GetComponent<Shoot>().enabled=false;
+                GameObject.Find("AR Session Origin").GetComponent<ShootNet>().enabled = false;
+                
             }
         }
     }
     public RawImage[] lifeUI;           // 채력 UI이미지
     public Button powerUpButton;        // 파워업 버튼
+    public AudioSource powerUPButtonSound;
 
     public static GameManager instance; // 싱글턴 객체
 
@@ -50,8 +55,15 @@ public class GameManager : MonoBehaviour
     public Slider powerUPTimeSlider;
     public Image powerUPSliderFillImage;
 
+    public RawImage powerUPButtonImage;
+    public Texture[] powerUPTextures;
 
 
+    public GameObject gameOverUI;
+    public AudioSource restartButtonSound;
+    public GameObject spwanManager;
+
+    bool gameState;
 
     private void Awake()
     {
@@ -67,42 +79,51 @@ public class GameManager : MonoBehaviour
         powerUPTimeSlider.maxValue = powerUpLimitTime;  // 파워업 시간을 설정하고 시작시 비활성화하고
         powerUPTimeSlider.value = powerUpLimitTime;     // 파워업이 활성화 되면 다시 보여지게 한다.
         powerUPSliderFillImage.enabled = false;
+        gameOverUI.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (coolTimeButtonLock)
+        if (gameState)
         {
-            coolTimeButtonLockTime += Time.deltaTime;
-            if (coolTimeButtonLockTime > coolTimeButtonLockLimitTime)
+            if (coolTimeButtonLock)
             {
-                // 버튼 다시활성화 하고 버튼눌림상태를 비활성화
-                coolTimeButtonLock = false;
-                powerUpButton.interactable = true;
+
+                coolTimeButtonLockTime += Time.deltaTime;
+                if (coolTimeButtonLockTime > coolTimeButtonLockLimitTime)
+                {
+
+                    // 버튼 다시활성화 하고 버튼눌림상태를 비활성화
+                    coolTimeButtonLock = false;
+                    powerUpButton.interactable = true;
+                    powerUPButtonImage.texture = powerUPTextures[0];
+                }
+            }
+
+            if (powerUPState)
+            {
+                powerUPButtonImage.texture = powerUPTextures[1];
+                powerUPSliderFillImage.enabled = true;
+                curPowerUpTime += Time.deltaTime;
+                float temp = powerUPTimeSlider.value;
+                temp -= Time.deltaTime;
+                if (temp < 0)
+                {
+                    temp = 0;
+                }
+                powerUPTimeSlider.value = temp;
+                if (curPowerUpTime > powerUpLimitTime)
+                {
+                    // 파워업상태가 끝남
+                    powerUPState = false;
+
+                    powerUPTimeSlider.value = powerUPTimeSlider.maxValue;
+                    powerUPSliderFillImage.enabled = false;
+                }
             }
         }
-
-        if (powerUPState)
-        {
-            powerUPSliderFillImage.enabled = true;
-            curPowerUpTime += Time.deltaTime;
-            float temp = powerUPTimeSlider.value;
-            temp -= Time.deltaTime;
-            if (temp < 0)
-            {
-                temp = 0;
-            }
-            powerUPTimeSlider.value = temp;
-            if (curPowerUpTime > powerUpLimitTime)
-            {
-                // 버튼 다시활성화 하고 버튼눌림상태를 비활성화
-                powerUPState = false;
-
-                powerUPTimeSlider.value = powerUPTimeSlider.maxValue;
-                powerUPSliderFillImage.enabled = false;
-            }
-        }
+     
 
     }
 
@@ -110,6 +131,7 @@ public class GameManager : MonoBehaviour
     // 일정 시간동안 파워업해서 총알에 이펙트를 추가한다.
     public void OnClickPowerUP()
     {
+        powerUPButtonSound.Play();
         coolTimeButtonLock = true;
         //// 버튼 비활성화
         powerUpButton.interactable = false;
@@ -118,9 +140,19 @@ public class GameManager : MonoBehaviour
         coolTimeButtonLockTime = 0;
         // UI를 불타오르게 하는 이펙트 처리... 
     }
-    
-    public void GoMainScene()
+
+    public void OnRestartBt()
     {
+        restartButtonSound.Play();
         SceneManager.LoadScene("MainScene");
+    }
+
+    public bool GetGameState() {
+        return gameState;
+    }
+
+    public void SetGameState(bool st)
+    {
+        gameState = st;
     }
 }

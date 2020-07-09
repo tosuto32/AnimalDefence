@@ -12,6 +12,8 @@ public class Bullet : MonoBehaviour
     public int attackPower;
     Collider col;
     bool crash;
+    public AudioClip[] bulletSoundClip;
+    AudioSource bulletSound;
 
 
     public GameObject bulletEffectFactory;
@@ -28,6 +30,8 @@ public class Bullet : MonoBehaviour
         {
             attackPower = 1;
         }
+        bulletSound = GetComponent<AudioSource>();
+        bulletSound.playOnAwake = false;
 
     }
 
@@ -42,6 +46,8 @@ public class Bullet : MonoBehaviour
         // 총알에 맞은것이 동물이면 채력을 1깍고 채력이 0이라면 파괴한다.
         if (other.gameObject.tag.Contains("Animal"))
         {
+            bulletSound.clip = bulletSoundClip[Random.Range(0, 2)];
+            bulletSound.Play();
             // 다른거와 충돌한적이 없다면
             if (crash == false)
             {

@@ -21,7 +21,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1641488445131827132
 Transform:
   m_ObjectHideFlags: 0
@@ -99,6 +99,8 @@ MonoBehaviour:
   netEffectFactory: {fileID: 6813433390332642719, guid: ee546741d8b1f124ebe82af6159e1026,
     type: 3}
   netDamage: 3
+  brokenSoundSource: []
+  thisRenders: []
 --- !u!54 &1641488445131827129
 Rigidbody:
   m_ObjectHideFlags: 0

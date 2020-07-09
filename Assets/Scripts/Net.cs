@@ -7,7 +7,7 @@ public class Net : MonoBehaviour
     // 태어날때 이동할 Vector3[]을 받아서 들어있는 Vector3의 값을 순서대로 이동하자.
 
     Rigidbody rb;
-    public float speed = 5;
+    //public float speed = 5;
 
     Vector3[] route;
     int targetIndex = 0;
@@ -60,7 +60,7 @@ public class Net : MonoBehaviour
         //route의 배열에 들어있는 위치들을 경유하여 이동시키자.
         if (targetIndex < route.Length)
         {
-            transform.position = Vector3.Lerp(transform.position, route[targetIndex], Time.deltaTime * 50);
+            transform.position = Vector3.Lerp(transform.position, route[targetIndex], Time.deltaTime * 300);
             if (Vector3.Distance(transform.position, route[targetIndex]) < 0.5f)
             {
                 transform.position = route[targetIndex];

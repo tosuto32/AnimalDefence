@@ -28,26 +28,30 @@ public class SpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        curRabbitTime += Time.deltaTime;
-        if (curRabbitTime > createRabbitTime)
+        if (GameManager.instance.GetGameState())
         {
-            GameObject rabbit = Instantiate(rabbitFactory);
-            rabbit.transform.position = spawnPoint.position;
-            curRabbitTime = 0;
-        }
-        curDogTime += Time.deltaTime;
-        if (curDogTime > createDogTime)
-        {
-            GameObject dog = Instantiate(dogFactory);
-            dog.transform.position = spawnPoint.position;
-            curDogTime = 0;
-        }
-        curTigerTime += Time.deltaTime;
-        if (curTigerTime > createTigerTime)
-        {
-            GameObject tiger = Instantiate(tigerFactory);
-            tiger.transform.position = spawnPoint.position;
-            curTigerTime = 0;
+            curRabbitTime += Time.deltaTime;
+            if (curRabbitTime > createRabbitTime)
+            {
+                GameObject rabbit = Instantiate(rabbitFactory);
+                rabbit.transform.position = spawnPoint.position;
+                curRabbitTime = 0;
+            }
+            curDogTime += Time.deltaTime;
+            if (curDogTime > createDogTime)
+            {
+                GameObject dog = Instantiate(dogFactory);
+                dog.transform.position = spawnPoint.position;
+                curDogTime = 0;
+            }
+            curTigerTime += Time.deltaTime;
+            if (curTigerTime > createTigerTime)
+            {
+                GameObject tiger = Instantiate(tigerFactory);
+                tiger.transform.position = spawnPoint.position;
+                curTigerTime = 0;
+            }
+
         }
 
     }

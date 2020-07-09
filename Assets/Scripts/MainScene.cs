@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MainScene : MonoBehaviour
 {
-    
+    public AudioSource buttonSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +20,7 @@ public class MainScene : MonoBehaviour
 
     public void OnStartClick()
     {
+        buttonSound.Play();
         SceneManager.LoadScene("GameScene");
     }
 
