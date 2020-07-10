@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+// 테스트용으로 만든 스크립트 사용안함
 public class ShootNet_v2 : MonoBehaviour
 {
     // net를 bezier 곡선으로 네트의 조준선을 표시하고 조준선대로 net를 날리고싶다.

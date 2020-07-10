@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
+// 총알이 생성되면 할 일을 적은 함수
 // 총알은 카메라 정면으로 이동한다.
 // 이동하다 동물에 부딪히면 동물의 채력을 1깍는다.
 public class Bullet : MonoBehaviour

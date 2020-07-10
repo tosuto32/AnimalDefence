@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 
+// 마커리스 방식으로 AR으로 게임 상태에따라 시작하게하는 스크립트
 public class ARManager : MonoBehaviour
 {
     ARRaycastManager arRaycastManager;

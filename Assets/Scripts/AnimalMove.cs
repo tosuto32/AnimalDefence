@@ -11,8 +11,6 @@ using UnityEngine.AI;
 // -피격
 //
 
-// 목적지
-// 속도
 
 public class AnimalMove : MonoBehaviour
 {
@@ -31,7 +29,7 @@ public class AnimalMove : MonoBehaviour
 
     float speed;         // 속도를 제어하기위한 변수
 
-    string myName;
+    string myName;      // 현재 동물의 이름을 가지고 각각 속도를 제어
     float rabbitSpeed = 6;
     float dogSpeed = 4;
     float TigerSpeed = 2;
@@ -47,7 +45,7 @@ public class AnimalMove : MonoBehaviour
     }
     State state;                // 동물의 상태에 변수
 
-    float curStopTime;
+    float curStopTime;          // 총알이나 폭탄에 맞으면 멈추는 시간체크
     float endStopTime = 2;
 
     float curRoarTime;          // 로어 모션 시간체크
@@ -64,12 +62,12 @@ public class AnimalMove : MonoBehaviour
     bool checkDamage;           // 목적지에 도착하면 1번만 플레이어에게 데미지를 준다.
 
 
-    public GameObject buffEfectFactory;
+    public GameObject buffEfectFactory;     // 호랑이의 스킬이펙트
 
-    AudioSource roarSound;
+    AudioSource roarSound;                  // 호랑이의 스킬 효과음
     public AudioClip roarSoundSorce;
 
-    public GameObject wayPoint;
+    public GameObject wayPoint;             // 경로의 위치를 가지고있는 게임오브젝트
 
     // Start is called before the first frame update
     void Start()
@@ -82,11 +80,11 @@ public class AnimalMove : MonoBehaviour
 
         targetIndex = 0;            // 배열인덱스값 초기화
 
-        curStopTime = 0;
+        curStopTime = 0;            // 시간값들 초기화
         curRoarTime = 0;
         //wayPoint = GetComponent<WayPoint>();
         //wayPoint.GetWayPoint();
-        wayPoint = GameObject.Find("WayPoint");
+        wayPoint = GameObject.Find("WayPoint");     
         WayPoint wp = wayPoint.GetComponent<WayPoint>();
         targets = wp.GetWayPoint();  // 경유지 좌표 가져오기
         am.GetComponent<Animator>();
@@ -95,7 +93,7 @@ public class AnimalMove : MonoBehaviour
         checkDamage = true;
 
         // 자신의 이름을 가져와서 이름에따라 속도 정하기
-        myName = gameObject.name;
+        myName = gameObject.name;               // 호랑이일때만 스킬사용시 필요한 사운드소스 초기화
         if (myName.Contains("Tiger"))
         {
             roarSound = gameObject.AddComponent<AudioSource>();
@@ -107,7 +105,7 @@ public class AnimalMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.gameObject.name.Contains("Tiger"))
+        if (transform.gameObject.name.Contains("Tiger"))        // 호랑이일때만 스킬사용 쿨타임체크
         {
             curRoarCoolTime += Time.deltaTime;
             if (curRoarCoolTime > roarCoolTime)
@@ -117,16 +115,16 @@ public class AnimalMove : MonoBehaviour
             }
         }
         //navMesh.speed = speed;      // 속도변화를 적용하기위해 업데이트에서 조절
-        UpdateFind();
+        UpdateFind();                   // 상태에따라 아래 함수를 호출함
         UpdateMove2();
         UpdateStop();
         UpdateRoar();
-        UpdateDie();                // 상태에따라 아래 함수를 호출함
-        //UpdateMove();
-        print(state);   //상태체크용 프린트
+        UpdateDie();                
+        //UpdateMove();         // 현재는 미사용 move2로 대체
+        //print(state);   //상태체크용 프린트
     }
 
-    private void UpdateRoar()
+    private void UpdateRoar()               // 호랑이 스킬사용후 찾기상태로 전이
     {
         if (state == State.Roar)
         {
@@ -141,7 +139,7 @@ public class AnimalMove : MonoBehaviour
         }
     }
 
-    private void Roar()
+    private void Roar()             
     {
         // 호랑이가 자신주위의 범위안에 동물들의 스피드를 3 증가시킨다.
         roarSound.Play();
@@ -159,7 +157,7 @@ public class AnimalMove : MonoBehaviour
 
 
     }
-    private void AddSpeed(float addSpeed)
+    private void AddSpeed(float addSpeed)       // 해당동물에 스피드를 올린다.
     {
         if (myName.Contains("Rabbit"))
         {
@@ -176,7 +174,7 @@ public class AnimalMove : MonoBehaviour
     }
 
 
-    private void UpdateDie()
+    private void UpdateDie()        // 죽는상태
     {
         if (state == State.Die)
         {
@@ -184,7 +182,7 @@ public class AnimalMove : MonoBehaviour
         }
     }
 
-    private void UpdateStop()
+    private void UpdateStop()       // 총알이나 폭탄에 맞을때 멈춘상태
     {
         if (state == State.Stop)
         {
@@ -214,7 +212,7 @@ public class AnimalMove : MonoBehaviour
 
     // 이동을 직접이동으로 수정해야함
 
-    private void UpdateMove2()
+    private void UpdateMove2()          // 다음목적지로 이동하는 상태
     {
         if (state == State.Move)
         {
@@ -266,7 +264,7 @@ public class AnimalMove : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void OnCollisionEnter(Collision other)          // 총알에 맞을때 스톱상태로
     {
         if (other.gameObject.name.Contains("Bullet"))
         {

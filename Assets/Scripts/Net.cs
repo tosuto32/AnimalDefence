@@ -60,7 +60,7 @@ public class Net : MonoBehaviour
         //route의 배열에 들어있는 위치들을 경유하여 이동시키자.
         if (targetIndex < route.Length)
         {
-            transform.position = Vector3.Lerp(transform.position, route[targetIndex], Time.deltaTime * 300);
+            transform.position = Vector3.Lerp(transform.position, route[targetIndex], 30000f);
             if (Vector3.Distance(transform.position, route[targetIndex]) < 0.5f)
             {
                 transform.position = route[targetIndex];

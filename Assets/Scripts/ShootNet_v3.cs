@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// 테스트용으로 만든 스크립트 사용안함
 public class ShootNet_v3 : MonoBehaviour
 {
     public LineRenderer lr;

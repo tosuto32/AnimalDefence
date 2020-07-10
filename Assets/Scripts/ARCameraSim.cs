@@ -6,6 +6,7 @@ using UnityEngine;
 // 마우스 오른쪽 버튼을 누르고 카메라를 이동 및 회전하고싶다.
 // 이동 WASDQE
 // 회전 마우스 입력값
+// AR붙이기전에 그냥 카메라로 조작하기위해 만든 스크립트
 public class ARCameraSim : MonoBehaviour
 {
     bool isButtonDown;

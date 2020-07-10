@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
+// 동물들의 채력을 관리하는 스크립트
 public class AnimalHP : MonoBehaviour
 {
     float curHp;        // 동물의 현재채력
@@ -17,9 +17,9 @@ public class AnimalHP : MonoBehaviour
             curHp -= Mathf.Max(0, value);
             //sliderHp.value = curHp;
 
-            if (HP <= 0)
+            if (HP <= 0)    // 채력이 0일때 각 동물마다 점수처리
             {
-                if (transform.gameObject.name.Contains("Rabbit"))           // 채력이 0이여서 죽으면 점수처리
+                if (transform.gameObject.name.Contains("Rabbit"))           
                 {
                     ScoreManager.instance.SetScore(ScoreManager.instance.rabbitScore);
                 }else if (transform.gameObject.name.Contains("Dog"))
@@ -29,9 +29,9 @@ public class AnimalHP : MonoBehaviour
                 {
                     ScoreManager.instance.SetScore(ScoreManager.instance.tigerScore);
                 }
-                print("채력이 0 죽음");
+                //print("채력이 0 죽음");
             }
-            print("hit      " + HP );
+            //print("hit      " + HP );
         }
     }
 
@@ -39,7 +39,7 @@ public class AnimalHP : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        curHp = maxHp;
+        curHp = maxHp;  // 생성될때 현재 채력을 최대채력으로 설정
     }
 
     // Update is called once per frame

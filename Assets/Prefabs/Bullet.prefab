@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f502f2a244c1345458e4e41c7a2ec2ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 100
+  speed: 200
   attackPower: 1
   bulletSoundClip:
   - {fileID: 8300000, guid: c8e64f76a971e324cb12a1e564355f56, type: 3}
@@ -180,8 +180,8 @@ TrailRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
-        value: 0.1782608
+        time: 0.006011963
+        value: 0.49565887
         inSlope: 0
         outSlope: 0
         tangentMode: 0

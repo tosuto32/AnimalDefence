@@ -112,49 +112,51 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11694}
     - Class: 114
-      Script: {instanceID: 11952}
+      Script: {instanceID: 11718}
     - Class: 114
-      Script: {instanceID: 12050}
+      Script: {instanceID: 11954}
     - Class: 114
-      Script: {instanceID: 12330}
+      Script: {instanceID: 12052}
     - Class: 114
-      Script: {instanceID: 12368}
+      Script: {instanceID: 12332}
     - Class: 114
-      Script: {instanceID: 12386}
+      Script: {instanceID: 12370}
     - Class: 114
-      Script: {instanceID: 12492}
+      Script: {instanceID: 12388}
     - Class: 114
-      Script: {instanceID: 12514}
+      Script: {instanceID: 12494}
     - Class: 114
-      Script: {instanceID: 12536}
+      Script: {instanceID: 12516}
     - Class: 114
-      Script: {instanceID: 12766}
+      Script: {instanceID: 12538}
     - Class: 114
-      Script: {instanceID: 12968}
+      Script: {instanceID: 12768}
     - Class: 114
-      Script: {instanceID: 13090}
+      Script: {instanceID: 12970}
     - Class: 114
-      Script: {instanceID: 13118}
+      Script: {instanceID: 13092}
     - Class: 114
-      Script: {instanceID: 13136}
+      Script: {instanceID: 13120}
     - Class: 114
-      Script: {instanceID: 13160}
+      Script: {instanceID: 13138}
     - Class: 114
-      Script: {instanceID: 13294}
+      Script: {instanceID: 13162}
     - Class: 114
-      Script: {instanceID: 13316}
+      Script: {instanceID: 13298}
     - Class: 114
-      Script: {instanceID: 13332}
+      Script: {instanceID: 13320}
     - Class: 114
-      Script: {instanceID: 13352}
+      Script: {instanceID: 13336}
     - Class: 114
-      Script: {instanceID: 13438}
+      Script: {instanceID: 13356}
     - Class: 114
-      Script: {instanceID: 13544}
+      Script: {instanceID: 13442}
     - Class: 114
-      Script: {instanceID: 13578}
+      Script: {instanceID: 13468}
     - Class: 114
-      Script: {instanceID: 69998}
+      Script: {instanceID: 13548}
+    - Class: 114
+      Script: {instanceID: 13582}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 120
@@ -217,19 +219,19 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11442}
     - Class: 114
-      Script: {instanceID: 11798}
+      Script: {instanceID: 11800}
     - Class: 114
-      Script: {instanceID: 11952}
+      Script: {instanceID: 11954}
     - Class: 114
-      Script: {instanceID: 12492}
+      Script: {instanceID: 12494}
     - Class: 114
-      Script: {instanceID: 12514}
+      Script: {instanceID: 12516}
     - Class: 114
-      Script: {instanceID: 13090}
+      Script: {instanceID: 13092}
     - Class: 114
-      Script: {instanceID: 13464}
+      Script: {instanceID: 13468}
     - Class: 114
-      Script: {instanceID: 13544}
+      Script: {instanceID: 13548}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -469,6 +471,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: RectMask2D
+  - hash:
+      serializedVersion: 2
+      Hash: 8ea3832f7d7014bf6ae5b9ba329d9bbc
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ARManager
   - hash:
       serializedVersion: 2
       Hash: d941ab6dd93d37ffdf2277f2ea2375a0
@@ -903,6 +911,12 @@ ScriptsOnlyBuild:
     className: ARPointCloudMeshVisualizer
   - hash:
       serializedVersion: 2
+      Hash: 75b3034a9e63b0c61731dc84866f847d
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: MarkerMulti
+  - hash:
+      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: FiveRabbitsDemo
@@ -1081,18 +1095,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: 75b3034a9e63b0c61731dc84866f847d
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: MarkerMulti
-  - hash:
-      serializedVersion: 2
-      Hash: 8ea3832f7d7014bf6ae5b9ba329d9bbc
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: ARManager
   platform: 13
   scenePathNames:
   - Assets/Scenes/MainScene.unity
